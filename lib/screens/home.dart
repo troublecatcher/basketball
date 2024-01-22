@@ -1,8 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:basketball/api/matches.dart';
 import 'package:basketball/api/teams.dart';
+import 'package:basketball/screens/image_widget.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'dart:convert';
 import 'package:intl/intl.dart';
@@ -50,10 +53,10 @@ class HomeScreen extends ConsumerWidget {
             itemCount: matchList.length,
             itemBuilder: (context, index) {
               final matchData = matchList[index];
-              matchList[0]['gameStatus'] = "Live - In Progress";
-              matchList[0]['gameClock'] = "4th - 38:22";
-              matchList[0]['homePts'] = "128";
-              matchList[0]['awayPts'] = "122";
+              // matchList[0]['gameStatus'] = "Live - In Progress";
+              // matchList[0]['gameClock'] = "4th - 38:22";
+              // matchList[0]['homePts'] = "128";
+              // matchList[0]['awayPts'] = "122";
               final firstNonCurrentMatchIndex = matchList.indexOf(
                   matchList.firstWhere(
                       (match) => match['gameStatus'] != "Live - In Progress"));
@@ -129,19 +132,10 @@ class CurrentMatchCard extends ConsumerWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           const SizedBox(height: 20),
-                          Image.network(
-                            teamList
-                                .firstWhere(
-                                    (team) => team.teamAbv == match.home)
-                                .espnLogo1,
-                            width: 60,
-                            height: 60,
-                            errorBuilder: (context, error, stackTrace) {
-                              return const Placeholder(
-                                fallbackHeight: 60,
-                                fallbackWidth: 60,
-                              );
-                            },
+                          ImageWidget(
+                            teamList: teamList,
+                            match: match,
+                            ha: 'h',
                           ),
                           Text(
                             teamList
@@ -191,19 +185,10 @@ class CurrentMatchCard extends ConsumerWidget {
                       return Column(
                         children: [
                           const SizedBox(height: 20),
-                          Image.network(
-                            teamList
-                                .firstWhere(
-                                    (team) => team.teamAbv == match.away)
-                                .espnLogo1,
-                            width: 60,
-                            height: 60,
-                            errorBuilder: (context, error, stackTrace) {
-                              return const Placeholder(
-                                fallbackHeight: 60,
-                                fallbackWidth: 60,
-                              );
-                            },
+                          ImageWidget(
+                            teamList: teamList,
+                            match: match,
+                            ha: 'a',
                           ),
                           Text(
                               teamList
@@ -290,18 +275,10 @@ class MatchCard extends ConsumerWidget {
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Image.network(
-                          teamList
-                              .firstWhere((team) => team.teamAbv == match.home)
-                              .espnLogo1,
-                          width: 40,
-                          height: 40,
-                          errorBuilder: (context, error, stackTrace) {
-                            return const Placeholder(
-                              fallbackHeight: 40,
-                              fallbackWidth: 40,
-                            );
-                          },
+                        ImageWidget(
+                          teamList: teamList,
+                          match: match,
+                          ha: 'h',
                         ),
                         Text(
                             teamList
@@ -353,18 +330,10 @@ class MatchCard extends ConsumerWidget {
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Image.network(
-                          teamList
-                              .firstWhere((team) => team.teamAbv == match.away)
-                              .espnLogo1,
-                          width: 40,
-                          height: 40,
-                          errorBuilder: (context, error, stackTrace) {
-                            return const Placeholder(
-                              fallbackHeight: 40,
-                              fallbackWidth: 40,
-                            );
-                          },
+                        ImageWidget(
+                          teamList: teamList,
+                          match: match,
+                          ha: 'a',
                         ),
                         Text(
                             teamList

@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:basketball/api/news.dart';
 import 'package:basketball/router/router.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -72,8 +73,8 @@ class NewsCard extends ConsumerWidget {
               tag: 'newsImage_${news.title}',
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
-                child: Image.network(
-                  news.imageLink,
+                child: CachedNetworkImage(
+                  imageUrl: news.imageLink,
                   width: 156,
                   height: 156,
                   fit: BoxFit.cover,
