@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'router.dart';
@@ -14,60 +15,85 @@ class MainScreen extends StatelessWidget {
       transitionBuilder: (context, child, animation) => child,
       routes: const [
         HomeRoute(),
-        NotesRoute(),
         NewsRoute(),
+        RatingRoute(),
         SettingsRoute(),
       ],
       builder: (context, child) {
         final tabsRouter = AutoTabsRouter.of(context);
         return Scaffold(
           body: child,
-          bottomNavigationBar: Container(
-            decoration: const BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: Color.fromRGBO(82, 41, 17, 0.21),
-                  offset: Offset(2, 4),
-                  blurRadius: 25,
-                  spreadRadius: 0,
+          bottomNavigationBar: BottomNavigationBar(
+            backgroundColor: const Color.fromRGBO(34, 34, 50, 1),
+            type: BottomNavigationBarType.fixed,
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
+            currentIndex: tabsRouter.activeIndex,
+            onTap: (value) {
+              tabsRouter.setActiveIndex(value);
+            },
+            items: [
+              BottomNavigationBarItem(
+                icon: SvgPicture.asset('assets/icons/default/home.svg'),
+                activeIcon: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text('Main',
+                        style: TextStyle(
+                          color: Color.fromRGBO(36, 107, 253, 1),
+                          fontSize: 14.sp,
+                        )),
+                    SvgPicture.asset('assets/icons/default/circle.svg'),
+                  ],
                 ),
-              ],
-            ),
-            child: BottomNavigationBar(
-              type: BottomNavigationBarType.fixed,
-              iconSize: 50,
-              elevation: 50,
-              showSelectedLabels: false,
-              showUnselectedLabels: false,
-              selectedItemColor: Colors.black,
-              currentIndex: tabsRouter.activeIndex,
-              onTap: (value) {
-                tabsRouter.setActiveIndex(value);
-              },
-              items: [
-                BottomNavigationBarItem(
-                  icon: SvgPicture.asset('assets/icons/default/home.svg'),
-                  activeIcon: SvgPicture.asset('assets/icons/active/home.svg'),
-                  label: '',
+                label: '',
+              ),
+              BottomNavigationBarItem(
+                icon: SvgPicture.asset('assets/icons/default/explore.svg'),
+                activeIcon: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Explore',
+                        style: TextStyle(
+                          color: Color.fromRGBO(36, 107, 253, 1),
+                          fontSize: 14.sp,
+                        )),
+                    SvgPicture.asset('assets/icons/default/circle.svg'),
+                  ],
                 ),
-                BottomNavigationBarItem(
-                  icon: SvgPicture.asset('assets/icons/default/notes.svg'),
-                  activeIcon: SvgPicture.asset('assets/icons/active/notes.svg'),
-                  label: '',
+                label: '',
+              ),
+              BottomNavigationBarItem(
+                icon: SvgPicture.asset('assets/icons/default/rating.svg'),
+                activeIcon: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Rating',
+                        style: TextStyle(
+                          color: Color.fromRGBO(36, 107, 253, 1),
+                          fontSize: 14.sp,
+                        )),
+                    SvgPicture.asset('assets/icons/default/circle.svg'),
+                  ],
                 ),
-                BottomNavigationBarItem(
-                  icon: SvgPicture.asset('assets/icons/default/news.svg'),
-                  activeIcon: SvgPicture.asset('assets/icons/active/news.svg'),
-                  label: '',
+                label: '',
+              ),
+              BottomNavigationBarItem(
+                icon: SvgPicture.asset('assets/icons/default/profile.svg'),
+                activeIcon: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('My Profile',
+                        style: TextStyle(
+                          color: Color.fromRGBO(36, 107, 253, 1),
+                          fontSize: 14.sp,
+                        )),
+                    SvgPicture.asset('assets/icons/default/circle.svg'),
+                  ],
                 ),
-                BottomNavigationBarItem(
-                  icon: SvgPicture.asset('assets/icons/default/settings.svg'),
-                  activeIcon:
-                      SvgPicture.asset('assets/icons/active/settings.svg'),
-                  label: '',
-                ),
-              ],
-            ),
+                label: '',
+              ),
+            ],
           ),
         );
       },

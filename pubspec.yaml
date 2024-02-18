@@ -15,18 +15,21 @@ dependencies:
   flutter_svg: ^2.0.9
   flutter_riverpod: ^2.4.9
   riverpod_annotation: ^2.3.3
-  http: ^1.1.0
+  http: ^1.2.0
   html: ^0.15.4
   intl: ^0.19.0
   shared_preferences: ^2.2.2
   flutter_masonry_view: ^0.0.2
-  url_launcher: ^6.2.2
   app_settings: ^5.1.1
   share_plus: ^7.2.1
   image_picker: ^1.0.5
   permission_handler: ^11.0.1
   provider: ^6.1.1
-  cached_network_image: ^3.3.1
+  shimmer: ^3.0.0
+  get_it: ^7.6.7
+  get: ^4.6.6
+  searchbar_animation: ^0.0.4
+  flutter_screenutil: ^5.9.0
 
 dev_dependencies:
   flutter_test:
@@ -38,23 +41,12 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/icons/default/home.svg
-    - assets/icons/active/home.svg
-    - assets/icons/default/notes.svg
-    - assets/icons/active/notes.svg
-    - assets/icons/default/news.svg
-    - assets/icons/active/news.svg
-    - assets/icons/default/settings.svg
-    - assets/icons/active/settings.svg
-    - assets/logo.svg
-    - assets/icons/notes/edit.svg
-    - assets/icons/notes/trash.svg
-    - assets/icons/settings/photo.png
-    - assets/icons/settings/PrivacyPolicy.svg
-    - assets/icons/settings/TermsofUse.svg
-    - assets/icons/settings/Notification.svg
-    - assets/icons/settings/ShareApp.svg
+    - assets/
+    - assets/onboarding/
+    - assets/icons/default/
+    - assets/icons/settings/
   fonts:
-    - family: SrbijaSans
+    - family: ssp
       fonts:
-        - asset: fonts/SrbijaSans.otf
+        - asset: assets/ssp/SourceSansPro-Regular.ttf
+        - asset: assets/ssp/SourceSansPro-SemiBold.ttf

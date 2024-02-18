@@ -1,14 +1,20 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
+import '../main.dart';
+
 final teamsProvider = FutureProvider.autoDispose((ref) async {
   var url =
       Uri.parse('https://tank01-fantasy-stats.p.rapidapi.com/getNBATeams');
-  var headers = {
-    'X-RapidAPI-Key': 'c7354da376msh852a94ceb7134bfp1de1f1jsn60233212053c',
-    'X-RapidAPI-Host': 'tank01-fantasy-stats.p.rapidapi.com'
+  var params = {
+    'schedules': 'true',
+    'rosters': 'true',
+    'topPerformers': 'true',
+    'teamStats': 'true',
+    'statsToGet': 'averages'
   };
-  final response = await http.get(url, headers: headers);
+  final response =
+      await http.get(url.replace(queryParameters: params), headers: headers);
   if (response.statusCode == 200) {
     return response.body;
   } else {

@@ -1,4 +1,4 @@
-class Match {
+class GivenMatch {
   final String away;
   final String home;
   final String teamIDaway;
@@ -10,7 +10,7 @@ class Match {
   final String gameStatus;
   final String gameTime;
 
-  Match(
+  GivenMatch(
     this.away,
     this.home,
     this.teamIDaway,
@@ -23,8 +23,8 @@ class Match {
     this.gameTime,
   );
 
-  factory Match.fromJson(Map<String, dynamic> json) {
-    return Match(
+  factory GivenMatch.fromJson(Map<String, dynamic> json) {
+    return GivenMatch(
       json['away'],
       json['home'],
       json['teamIDAway'],

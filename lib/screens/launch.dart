@@ -1,8 +1,12 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:basketball/main.dart';
 import 'package:basketball/router/router.dart';
-import 'package:flutter/gestures.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+late PageController pageController;
 
 @RoutePage()
 class LaunchScreen extends StatefulWidget {
@@ -12,165 +16,193 @@ class LaunchScreen extends StatefulWidget {
   State<LaunchScreen> createState() => _LaunchScreenState();
 }
 
-class _LaunchScreenState extends State<LaunchScreen>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _animationController;
-  late Animation<Offset> _logoAnimation;
-  late Animation<double> _contentAnimation;
-
+class _LaunchScreenState extends State<LaunchScreen> {
   @override
   void initState() {
     super.initState();
-
-    _animationController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 1000),
-    );
-
-    _logoAnimation = Tween<Offset>(
-      begin: const Offset(0, 2.5),
-      end: const Offset(0, 0.75),
-    ).animate(
-      CurvedAnimation(
-        parent: _animationController,
-        curve: Curves.easeInOutBack,
-      ),
-    );
-
-    _contentAnimation = Tween<double>(begin: 0, end: 1).animate(
-      CurvedAnimation(
-        parent: _animationController,
-        curve: Curves.easeOutExpo,
-      ),
-    );
-
-    Future.delayed(const Duration(seconds: 1), () {
-      _animationController.forward();
-    });
-  }
-
-  @override
-  void dispose() {
-    _animationController.dispose();
-    super.dispose();
+    pageController = PageController(initialPage: 0);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SlideTransition(
-              position: _logoAnimation,
-              child: SvgPicture.asset('assets/logo.svg'),
-            ),
-            const Spacer(),
-            FadeTransition(
-              opacity: _contentAnimation,
-              child: SlideTransition(
-                position: Tween<Offset>(
-                  begin: const Offset(0, 2),
-                  end: const Offset(0, 0),
-                ).animate(_animationController),
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Column(
-                    children: [
-                      GestureDetector(
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 20, left: 20),
-                          child: Container(
-                              padding: const EdgeInsets.all(20),
-                              height: 62,
-                              width: MediaQuery.of(context).size.height,
-                              decoration: BoxDecoration(
-                                color: const Color.fromRGBO(244, 117, 44, 1),
-                                borderRadius: BorderRadius.circular(50),
-                              ),
-                              child: GestureDetector(
-                                onTap: () =>
-                                    context.router.replace(const MainRoute()),
-                                child: Text(
-                                  'Continue',
-                                  style: Theme.of(context).textTheme.titleLarge,
-                                  textAlign: TextAlign.center,
-                                ),
-                              )),
-                        ),
-                      ),
-                      const SizedBox(height: 50),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 20, left: 20),
-                        child: RichText(
-                          textAlign: TextAlign.center,
-                          text: TextSpan(
-                            style: const TextStyle(
-                              fontFamily: 'SrbijaSans',
-                              fontSize: 12,
-                              color: Colors.grey,
-                            ),
-                            children: <TextSpan>[
-                              const TextSpan(
-                                text:
-                                    'By clicking the "Continue" button, you agree to our ',
-                              ),
-                              TextSpan(
-                                text: 'Terms of use',
-                                style: const TextStyle(
-                                  color: Colors.black,
-                                ),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {
-                                    context.router
-                                        .push(const TermsOfUseRoute());
-                                  },
-                              ),
-                              const TextSpan(
-                                text: ' and ',
-                              ),
-                              TextSpan(
-                                text: 'Privacy Policy',
-                                style: const TextStyle(
-                                  color: Colors.black,
-                                ),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {
-                                    context.router
-                                        .push(const PrivacyPolicyRoute());
-                                  },
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Restoring your purchases...'),
-                            ),
-                          );
-                        },
-                        child: const Text(
-                          'Restore',
-                          style: TextStyle(
-                            fontFamily: 'SrbijaSans',
-                            fontSize: 12,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+      body: SafeArea(
+        child: PageView(
+          physics: const NeverScrollableScrollPhysics(),
+          controller: pageController,
+          children: const [
+            PageOne(),
+            PageTwo(),
+            PageThree(),
           ],
         ),
       ),
     );
+  }
+}
+
+class PageOne extends StatelessWidget {
+  const PageOne({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Padding(
+          padding: EdgeInsets.only(bottom: 100.h, right: 20.w, left: 20.w),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(child: Image.asset('assets/onboarding/1.png')),
+              Text(
+                'Discover all about Basketball',
+                style: TextStyle(fontSize: 40.sp, fontWeight: FontWeight.w600),
+              ),
+              Text(
+                'Immerse yourself in your favorite basketball matches with our app!',
+                style: TextStyle(
+                    fontSize: 16.sp,
+                    color: const Color.fromRGBO(101, 101, 107, 1)),
+              ),
+              Text(
+                'Well, let\'s begin!',
+                style: TextStyle(
+                    fontSize: 16.sp,
+                    color: const Color.fromRGBO(101, 101, 107, 1)),
+              ),
+            ],
+          ),
+        ),
+        const Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              NextPageButton(1),
+              SkipButton(),
+            ],
+          ),
+        )
+      ],
+    );
+  }
+}
+
+class PageTwo extends StatelessWidget {
+  const PageTwo({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Stack(
+        children: [
+          Padding(
+            padding: EdgeInsets.only(bottom: 100.h, right: 20.w, left: 20.w),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(child: Image.asset('assets/onboarding/2.png')),
+                SizedBox(height: 20.h),
+                Text(
+                    'Choose your favorite team from the world\'s sports communities.',
+                    style: TextStyle(
+                        fontSize: 24.sp, fontWeight: FontWeight.w600)),
+              ],
+            ),
+          ),
+          const Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                NextPageButton(2),
+                SkipButton(),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class PageThree extends StatelessWidget {
+  const PageThree({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Stack(
+        children: [
+          Padding(
+            padding: EdgeInsets.only(bottom: 100.h, right: 20.w, left: 20.w),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(child: Image.asset('assets/onboarding/3.png')),
+                SizedBox(height: 20.h),
+                Text(
+                  'Follow the basketball news, as well as the matches in real time.',
+                  style:
+                      TextStyle(fontSize: 24.sp, fontWeight: FontWeight.w600),
+                  textAlign: TextAlign.start,
+                ),
+              ],
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 30),
+              child: CupertinoButton(
+                color: const Color.fromRGBO(36, 107, 253, 1),
+                child: const Text('Let\'s get started!'),
+                onPressed: () async {
+                  await locator<SharedPreferences>()
+                      .setBool('isFirstTime', false);
+                  context.router.replace(const HomeRoute());
+                },
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class NextPageButton extends StatelessWidget {
+  final int page;
+  const NextPageButton(
+    this.page, {
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoButton(
+        borderRadius: BorderRadius.all(Radius.circular(16)),
+        color: const Color.fromRGBO(36, 107, 253, 1),
+        onPressed: () => pageController.animateToPage(page,
+            duration: const Duration(milliseconds: 200), curve: Curves.ease),
+        child: const Text('Next'));
+  }
+}
+
+class SkipButton extends StatelessWidget {
+  const SkipButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoButton(
+        onPressed: () async {
+          await locator<SharedPreferences>().setBool('isFirstTime', false);
+
+          context.router.replace(const HomeRoute());
+        },
+        child: const Text('Skip', style: TextStyle(color: Colors.grey)));
   }
 }
