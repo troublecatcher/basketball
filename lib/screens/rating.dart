@@ -73,7 +73,7 @@ class _RatingScreenState extends ConsumerState<RatingScreen> {
               flex: 1,
               child: CupertinoSlidingSegmentedControl(
                   backgroundColor: const Color.fromRGBO(24, 24, 41, 1),
-                  thumbColor: Colors.orange,
+                  thumbColor: const Color.fromRGBO(237, 107, 78, 1),
                   groupValue: pageIndex,
                   children: pages,
                   onValueChanged: (value) {
