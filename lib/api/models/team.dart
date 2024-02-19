@@ -4,7 +4,7 @@ class Team {
   final String teamName;
   final String espnLogo1;
   final String teamID;
-  final Map<String, dynamic> Roster;
+  final Map<String, dynamic> roster;
   final Map<String, dynamic> currentStreak;
   final String loss;
   final String wins;
@@ -23,7 +23,7 @@ class Team {
     required this.teamName,
     required this.espnLogo1,
     required this.teamID,
-    required this.Roster,
+    required this.roster,
     required this.currentStreak,
     required this.loss,
     required this.wins,
@@ -44,7 +44,7 @@ class Team {
       teamName: json['teamName'],
       espnLogo1: json['espnLogo1'],
       teamID: json['teamID'],
-      Roster: json['Roster'],
+      roster: json['Roster'],
       currentStreak: json['currentStreak'],
       loss: json['loss'],
       wins: json['wins'],

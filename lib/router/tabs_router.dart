@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../consts.dart';
 import 'router.dart';
 
 @RoutePage()
@@ -24,7 +25,7 @@ class MainScreen extends StatelessWidget {
         return Scaffold(
           body: child,
           bottomNavigationBar: BottomNavigationBar(
-            backgroundColor: const Color.fromRGBO(34, 34, 50, 1),
+            backgroundColor: kGrey34,
             type: BottomNavigationBarType.fixed,
             showSelectedLabels: false,
             showUnselectedLabels: false,
@@ -40,7 +41,7 @@ class MainScreen extends StatelessWidget {
                   children: [
                     Text('Main',
                         style: TextStyle(
-                          color: Color.fromRGBO(36, 107, 253, 1),
+                          color: kBlue,
                           fontSize: 14.sp,
                         )),
                     SvgPicture.asset('assets/icons/default/circle.svg'),
@@ -55,7 +56,7 @@ class MainScreen extends StatelessWidget {
                   children: [
                     Text('Explore',
                         style: TextStyle(
-                          color: Color.fromRGBO(36, 107, 253, 1),
+                          color: kBlue,
                           fontSize: 14.sp,
                         )),
                     SvgPicture.asset('assets/icons/default/circle.svg'),
@@ -70,7 +71,7 @@ class MainScreen extends StatelessWidget {
                   children: [
                     Text('Rating',
                         style: TextStyle(
-                          color: Color.fromRGBO(36, 107, 253, 1),
+                          color: kBlue,
                           fontSize: 14.sp,
                         )),
                     SvgPicture.asset('assets/icons/default/circle.svg'),
@@ -85,7 +86,7 @@ class MainScreen extends StatelessWidget {
                   children: [
                     Text('My Profile',
                         style: TextStyle(
-                          color: Color.fromRGBO(36, 107, 253, 1),
+                          color: kBlue,
                           fontSize: 14.sp,
                         )),
                     SvgPicture.asset('assets/icons/default/circle.svg'),

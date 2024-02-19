@@ -21,12 +21,6 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const HomeScreen(),
       );
     },
-    LaunchRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const LaunchScreen(),
-      );
-    },
     MainRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -62,17 +56,17 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const NewsScreen(),
       );
     },
-    NotificationRoute.name: (routeData) {
+    OnboardingRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const NotificationScreen(),
+        child: const OnboardingScreen(),
       );
     },
-    PlayerRoute.name: (routeData) {
-      final args = routeData.argsAs<PlayerRouteArgs>();
+    PlayerInfoRoute.name: (routeData) {
+      final args = routeData.argsAs<PlayerInfoRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: PlayerScreen(
+        child: PlayerInfoScreen(
           args.player,
           key: args.key,
           stat: args.stat,
@@ -91,11 +85,11 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const RatingScreen(),
       );
     },
-    RosterRoute.name: (routeData) {
-      final args = routeData.argsAs<RosterRouteArgs>();
+    RosterInfoRoute.name: (routeData) {
+      final args = routeData.argsAs<RosterInfoRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: RosterScreen(args.team),
+        child: RosterInfoScreen(args.team),
       );
     },
     SettingsRoute.name: (routeData) {
@@ -104,11 +98,11 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const SettingsScreen(),
       );
     },
-    TeamRoute.name: (routeData) {
-      final args = routeData.argsAs<TeamRouteArgs>();
+    TeamInfoRoute.name: (routeData) {
+      final args = routeData.argsAs<TeamInfoRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: TeamScreen(
+        child: TeamInfoScreen(
           args.team,
           key: args.key,
         ),
@@ -133,20 +127,6 @@ class HomeRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'HomeRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [LaunchScreen]
-class LaunchRoute extends PageRouteInfo<void> {
-  const LaunchRoute({List<PageRouteInfo>? children})
-      : super(
-          LaunchRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'LaunchRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -271,30 +251,30 @@ class NewsRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [NotificationScreen]
-class NotificationRoute extends PageRouteInfo<void> {
-  const NotificationRoute({List<PageRouteInfo>? children})
+/// [OnboardingScreen]
+class OnboardingRoute extends PageRouteInfo<void> {
+  const OnboardingRoute({List<PageRouteInfo>? children})
       : super(
-          NotificationRoute.name,
+          OnboardingRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'NotificationRoute';
+  static const String name = 'OnboardingRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
-/// [PlayerScreen]
-class PlayerRoute extends PageRouteInfo<PlayerRouteArgs> {
-  PlayerRoute({
+/// [PlayerInfoScreen]
+class PlayerInfoRoute extends PageRouteInfo<PlayerInfoRouteArgs> {
+  PlayerInfoRoute({
     required Player player,
     Key? key,
-    PlayerIndStat? stat,
+    PlayerStatIndividual? stat,
     List<PageRouteInfo>? children,
   }) : super(
-          PlayerRoute.name,
-          args: PlayerRouteArgs(
+          PlayerInfoRoute.name,
+          args: PlayerInfoRouteArgs(
             player: player,
             key: key,
             stat: stat,
@@ -302,13 +282,14 @@ class PlayerRoute extends PageRouteInfo<PlayerRouteArgs> {
           initialChildren: children,
         );
 
-  static const String name = 'PlayerRoute';
+  static const String name = 'PlayerInfoRoute';
 
-  static const PageInfo<PlayerRouteArgs> page = PageInfo<PlayerRouteArgs>(name);
+  static const PageInfo<PlayerInfoRouteArgs> page =
+      PageInfo<PlayerInfoRouteArgs>(name);
 }
 
-class PlayerRouteArgs {
-  const PlayerRouteArgs({
+class PlayerInfoRouteArgs {
+  const PlayerInfoRouteArgs({
     required this.player,
     this.key,
     this.stat,
@@ -318,11 +299,11 @@ class PlayerRouteArgs {
 
   final Key? key;
 
-  final PlayerIndStat? stat;
+  final PlayerStatIndividual? stat;
 
   @override
   String toString() {
-    return 'PlayerRouteArgs{player: $player, key: $key, stat: $stat}';
+    return 'PlayerInfoRouteArgs{player: $player, key: $key, stat: $stat}';
   }
 }
 
@@ -355,30 +336,31 @@ class RatingRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [RosterScreen]
-class RosterRoute extends PageRouteInfo<RosterRouteArgs> {
-  RosterRoute({
+/// [RosterInfoScreen]
+class RosterInfoRoute extends PageRouteInfo<RosterInfoRouteArgs> {
+  RosterInfoRoute({
     required Team team,
     List<PageRouteInfo>? children,
   }) : super(
-          RosterRoute.name,
-          args: RosterRouteArgs(team: team),
+          RosterInfoRoute.name,
+          args: RosterInfoRouteArgs(team: team),
           initialChildren: children,
         );
 
-  static const String name = 'RosterRoute';
+  static const String name = 'RosterInfoRoute';
 
-  static const PageInfo<RosterRouteArgs> page = PageInfo<RosterRouteArgs>(name);
+  static const PageInfo<RosterInfoRouteArgs> page =
+      PageInfo<RosterInfoRouteArgs>(name);
 }
 
-class RosterRouteArgs {
-  const RosterRouteArgs({required this.team});
+class RosterInfoRouteArgs {
+  const RosterInfoRouteArgs({required this.team});
 
   final Team team;
 
   @override
   String toString() {
-    return 'RosterRouteArgs{team: $team}';
+    return 'RosterInfoRouteArgs{team: $team}';
   }
 }
 
@@ -397,28 +379,29 @@ class SettingsRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [TeamScreen]
-class TeamRoute extends PageRouteInfo<TeamRouteArgs> {
-  TeamRoute({
+/// [TeamInfoScreen]
+class TeamInfoRoute extends PageRouteInfo<TeamInfoRouteArgs> {
+  TeamInfoRoute({
     required Team team,
     Key? key,
     List<PageRouteInfo>? children,
   }) : super(
-          TeamRoute.name,
-          args: TeamRouteArgs(
+          TeamInfoRoute.name,
+          args: TeamInfoRouteArgs(
             team: team,
             key: key,
           ),
           initialChildren: children,
         );
 
-  static const String name = 'TeamRoute';
+  static const String name = 'TeamInfoRoute';
 
-  static const PageInfo<TeamRouteArgs> page = PageInfo<TeamRouteArgs>(name);
+  static const PageInfo<TeamInfoRouteArgs> page =
+      PageInfo<TeamInfoRouteArgs>(name);
 }
 
-class TeamRouteArgs {
-  const TeamRouteArgs({
+class TeamInfoRouteArgs {
+  const TeamInfoRouteArgs({
     required this.team,
     this.key,
   });
@@ -429,7 +412,7 @@ class TeamRouteArgs {
 
   @override
   String toString() {
-    return 'TeamRouteArgs{team: $team, key: $key}';
+    return 'TeamInfoRouteArgs{team: $team, key: $key}';
   }
 }
 

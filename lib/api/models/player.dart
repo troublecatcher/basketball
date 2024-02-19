@@ -1,4 +1,4 @@
-import 'package:basketball/api/models/player_stat_ind.dart';
+import 'package:basketball/api/models/player_stat_individual.dart';
 
 class Player {
   final String playerID;
@@ -6,7 +6,7 @@ class Player {
   final String longName;
   final String teamID;
   final String? imgUrl;
-  final PlayerIndStat? stat;
+  final PlayerStatIndividual? stat;
 
   factory Player.fromJson(Map<String, dynamic> json) {
     return Player(

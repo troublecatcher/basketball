@@ -4,9 +4,9 @@ class TeamStat {
   final String ast;
   final String blk;
   final String stl;
-  final String TOV;
+  final String tov;
   final String ptsOffTOV;
-  final String PF;
+  final String pf;
   final String fta;
   final String ftm;
   final String ftp;
@@ -18,8 +18,8 @@ class TeamStat {
   final String tptfgp;
   final String fastBreakPts;
   final String pointsInPaint;
-  final String OffReb;
-  final String DefReb;
+  final String offReb;
+  final String defReb;
   final String largestLead;
   final String flagrantFouls;
   final String tech;
@@ -30,9 +30,9 @@ class TeamStat {
       this.ast,
       this.blk,
       this.stl,
-      this.TOV,
+      this.tov,
       this.ptsOffTOV,
-      this.PF,
+      this.pf,
       this.fta,
       this.ftm,
       this.ftp,
@@ -44,8 +44,8 @@ class TeamStat {
       this.tptfgp,
       this.fastBreakPts,
       this.pointsInPaint,
-      this.OffReb,
-      this.DefReb,
+      this.offReb,
+      this.defReb,
       this.largestLead,
       this.flagrantFouls,
       this.tech);
@@ -86,9 +86,9 @@ class TeamStat {
       'Assists': ast,
       'Blocks': blk,
       'Steals': stl,
-      'Turnovers': TOV,
+      'Turnovers': tov,
       'Points off Turnovers': ptsOffTOV,
-      'Personal Fouls': PF,
+      'Personal Fouls': pf,
       'Free Throws Attempted': fta,
       'Free Throws Made': ftm,
       'Free Throws Percentage': ftp,
@@ -100,8 +100,8 @@ class TeamStat {
       '3pts FG Percentage': tptfgp,
       'Fast Break Points': fastBreakPts,
       'Points in Paint': pointsInPaint,
-      'Offensive Rebounds': OffReb,
-      'Defensive Rebounds': DefReb,
+      'Offensive Rebounds': offReb,
+      'Defensive Rebounds': defReb,
       'Largest Lead': largestLead,
       'Flagrant Fouls': flagrantFouls,
       'Technical Fouls': tech,

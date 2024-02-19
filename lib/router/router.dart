@@ -2,26 +2,24 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../api/models/match.dart';
+import '../api/models/given_match.dart';
 import '../api/models/news.dart';
-import '../api/models/news_details.dart';
 import '../api/models/player.dart';
-import '../api/models/player_stat_ind.dart';
+import '../api/models/player_stat_individual.dart';
 import '../api/models/team.dart';
+import '../features/news/screens/news_details_screen.dart';
+import '../features/news/screens/news_screen.dart';
+import '../features/rating/player/player_info_screen.dart';
+import '../features/rating/rating_screen.dart';
+import '../features/rating/team/roster_info_screen.dart';
+import '../features/rating/team/team_info_screen.dart';
+import '../features/settings/screens/privacy_policy_screen.dart';
+import '../features/settings/screens/settings_screen.dart';
+import '../features/settings/screens/terms_of_use_screen.dart';
 import '../main.dart';
-import '../screens/etc/notification.dart';
-import '../screens/etc/privacy_policy.dart';
-import '../screens/etc/terms_of_use.dart';
-import '../screens/home.dart';
-import '../screens/launch.dart';
-import '../screens/match_details.dart';
-import '../screens/news.dart';
-import '../screens/news_details.dart';
-import '../screens/player_screen.dart';
-import '../screens/rating.dart';
-import '../screens/roster_screen.dart';
-import '../screens/settings.dart';
-import '../screens/team_screen.dart';
+import '../features/home/home_screen.dart';
+import '../features/onboarding/onboarding_screen.dart';
+import '../features/home/match_details/match_details_screen.dart';
 import 'tabs_router.dart';
 
 part 'router.gr.dart';
@@ -40,15 +38,14 @@ class AppRouter extends _$AppRouter {
               AutoRoute(page: SettingsRoute.page),
             ]),
         AutoRoute(
-            page: LaunchRoute.page,
+            page: OnboardingRoute.page,
             initial: locator<SharedPreferences>().getBool('isFirstTime')!),
         AutoRoute(page: TermsOfUseRoute.page),
         AutoRoute(page: PrivacyPolicyRoute.page),
-        AutoRoute(page: NotificationRoute.page),
         AutoRoute(page: MatchDetailsRoute.page),
-        AutoRoute(page: PlayerRoute.page),
-        AutoRoute(page: TeamRoute.page),
-        AutoRoute(page: RosterRoute.page),
+        AutoRoute(page: PlayerInfoRoute.page),
+        AutoRoute(page: TeamInfoRoute.page),
+        AutoRoute(page: RosterInfoRoute.page),
         AutoRoute(page: NewsDetailsRoute.page),
       ];
 }

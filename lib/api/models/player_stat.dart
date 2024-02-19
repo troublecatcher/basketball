@@ -6,9 +6,9 @@ class PlayerStat {
   final String ast;
   final String blk;
   final String stl;
-  final String TOV;
+  final String tov;
   final String plusMinus;
-  final String PF;
+  final String pf;
   final String tptfgp;
   final String tptfga;
   final String tptfgm;
@@ -21,9 +21,9 @@ class PlayerStat {
       this.ast,
       this.blk,
       this.stl,
-      this.TOV,
+      this.tov,
       this.plusMinus,
-      this.PF,
+      this.pf,
       this.tptfgp,
       this.tptfga,
       this.tptfgm);
